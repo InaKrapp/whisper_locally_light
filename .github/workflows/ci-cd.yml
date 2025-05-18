@@ -39,8 +39,21 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      # Add bundling and deployment on merging to production branch
+      - name: Build exe with PyInstaller
+        if: runner.os == 'Windows'
+        run: |
+          pyinstaller --onefile Wisp.py
+          # Adjust the command based on your project structure
+
+      - name: Test exe file
+        if: runner.os == 'Windows'
+        run: |
+          cd dist
+          .\Wisp.exe
+          # Add commands to verify the exe runs correctly
 
       - name: Run tests
         run: pytest
 
-# TODO: add bundling and deployment on merging to production branch
+
