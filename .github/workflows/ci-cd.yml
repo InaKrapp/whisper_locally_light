@@ -16,16 +16,9 @@ jobs:
     strategy:
       matrix:
         include:
-          # TODO: Add more OS versions such as windows-2019, ubuntu-20.04, macos-11.0 etc.
-          - os: ubuntu-latest
-            arch: x64
-          - os: ubuntu-latest
-            arch: arm64
           - os: windows-latest
             arch: x64
           - os: windows-latest
-            arch: arm64
-          - os: macos-latest
             arch: arm64
       fail-fast: false
 
