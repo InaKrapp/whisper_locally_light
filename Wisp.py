@@ -60,9 +60,6 @@ class MainWindow(QWidget):
         self.translatecheckbox = QCheckBox(tx("Translation_setting"))
         self.translatecheckbox.setChecked(False)
         self.translatecheckbox.stateChanged.connect(self.choose_translation)
-        self.speakercheckbox = QCheckBox(tx("Diarization_setting"))
-        self.speakercheckbox.setChecked(False)
-        self.speakercheckbox.stateChanged.connect(self.choose_diarization)
 
         # Transcription button
         self.transcription_edit = QTextEdit()
@@ -94,18 +91,17 @@ class MainWindow(QWidget):
         # Add the other two buttons to define accuracy and translation
         layout.addWidget(accuracy_button, 8, 0)
         layout.addWidget(self.accuracy_edit, 9, 0)
-        layout.addWidget(self.speakercheckbox, 10, 0)
-        layout.addWidget(self.translatecheckbox, 11, 0)
+        layout.addWidget(self.translatecheckbox, 10, 0)
 
         # Add the button to start the transcription process
-        layout.addWidget(self.transcription_button, 12, 0)
-        layout.addWidget(self.transcription_edit, 13, 0)
+        layout.addWidget(self.transcription_button, 11, 0)
+        layout.addWidget(self.transcription_edit, 12, 0)
 
         # Add the progress bar:
-        layout.addWidget(self.progress_bar, 14, 0)
+        layout.addWidget(self.progress_bar, 13, 0)
 
         # Add the button to close the program
-        layout.addWidget(close_button, 15, 0)
+        layout.addWidget(close_button, 14, 0)
 
         # Show the window
         self.show()
@@ -194,17 +190,12 @@ class MainWindow(QWidget):
             self.translation = 0
         else:
             self.translation = 1
-    
-    def choose_diarization(self, state):
-        """Select if speakers should be recognized. Default is state 0, means no speaker recognition."""
-        if state == 0:
-            self.diarization = 0
-        else:
-            self.diarization = 1
 
     def transcription_message(self):
         """ A message to be displayed once the transcription started, to show the user that the program works as intended."""
         self.transcription_edit.setText(tx("Transcription_started"))
+        if self.translation == 1 and self.accuracy == 5:
+            self.transcription_edit.setText(tx("Transcription_started_lang_warn"))
 
     def start_transcription(self):
         if self.transcription_button.text() == tx('Start_transcription'):
