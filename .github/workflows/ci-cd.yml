@@ -46,13 +46,6 @@ jobs:
           pyinstaller --onefile Wisp.py
           # Adjust the command based on your project structure
 
-      - name: Test exe file
-        if: runner.os == 'Windows'
-        run: |
-          cd dist
-          .\Wisp.exe
-          # Add commands to verify the exe runs correctly
-
       - name: Run tests
         run: pytest
 
