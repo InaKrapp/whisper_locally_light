@@ -50,9 +50,10 @@ Then, to create the .exe-file, run the following code:
 pyinstaller Wisp.py --onefile
  ```
 pyinstaller will create two folders, named 'dist' and 'build', in your current directory. You will find the .exe-file in the 'dist' folder. You can run it regardless of where it is on your computer, and also distribute it to other computers, for example, copying it to and from USB flash drives.
+Note: pyinstaller does not work with the diarization pipeline of the main branch in 'whisper_locally_running' yet. For now, I created another repository, 'whisper_locally_light' which contains a version of the program without speaker recognition on which pyinstaller should work.
 
 ## Compatibility and requirements of the program
-This program was developed using Python 3.11.9 on Windows 10. It works with Python 3.12.3, but it has not been tested on other systems or with other Python versions, and I can not guarantee it will be compatible with Windows 11.
+This program was developed using Python 3.11.9 on Windows 10. It works with Python 3.12.3, but it has not been tested on other systems or with other Python versions, and I can not guarantee it will be compatible with Windows 11. You might have to install ffmpeg.
 
 The program allows the user to record their own voice. But it might not work with all microphones. So far, it only supports mono recordings.
 If you'd like to use a microphone that does not work with Wisp, you can use any other software to record, and choose the files for transcription with Wisp afterwards.
