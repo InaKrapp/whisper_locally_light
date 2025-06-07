@@ -1,10 +1,6 @@
 name: Build and Release Executables
 
-on:
-  push:
-    branches: [ main ]
-  release:
-    types: [ created ]
+on: workflow_dispatch
 
 permissions:
   contents: write
@@ -14,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-11-arm, macos-13]
 
     runs-on: ${{ matrix.os }}
 
@@ -36,11 +32,9 @@ jobs:
       - name: Rename executable
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
-            mv dist/Wisp.exe dist/Wisp-windows.exe
-          elif [[ "$RUNNER_OS" == "Linux" ]]; then
-            mv dist/app dist/app-linux
+            mv dist/Wisp.exe dist/Wisp.exe
           elif [[ "$RUNNER_OS" == "macOS" ]]; then
-            mv dist/app dist/app-macos
+            mv dist/Wisp dist/Wisp
           fi
         shell: bash
 
@@ -80,6 +74,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            Wisp-windows.exe
+            Wisp.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
