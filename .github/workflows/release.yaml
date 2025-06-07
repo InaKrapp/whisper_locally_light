@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-11-arm, macos-13]
+        os: [windows-11-arm]
 
     runs-on: ${{ matrix.os }}
 
